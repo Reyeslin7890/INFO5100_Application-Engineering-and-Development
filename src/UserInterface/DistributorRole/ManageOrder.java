@@ -1,0 +1,642 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package UserInterface.DistributorRole;
+
+import Business.Enterprise.DistributorEnterprise;
+import Business.Enterprise.Enterprise;
+import Business.Gun.Bullet;
+import Business.Gun.BulletInventoryitem;
+import Business.Gun.Gun;
+import Business.Gun.GunBulletSystem;
+import Business.Gun.GunDirectory;
+import Business.Gun.GunInventoryitem;
+import Business.Network.Network;
+import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.BulletRequst;
+import Business.WorkQueue.GunRequest;
+import Business.WorkQueue.ShopRequest;
+import Business.WorkQueue.WorkRequest;
+import UserInterface.ManufactureRole.ManufactureAdminWorkJPanel;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
+public class ManageOrder extends javax.swing.JPanel {
+
+    private JPanel display;
+    private DistributorEnterprise distributorEnterprise;
+    private UserAccount userAccount;
+    private Network network;
+    private OrganizationDirectory directory;
+    private GunDirectory gunDirectory;
+    private GunBulletSystem gunBulletSystem;
+    private GunRequest gunRequest;
+    private BulletRequst bulletRequst;
+    int expense;
+    int revenue = 0;
+    int profit = 0;
+    int a = 0;
+    int count = 0;
+
+    ManageOrder(JPanel display, Enterprise enterprise, OrganizationDirectory organizationDirectory, UserAccount userAccount, Network network, GunBulletSystem gunBulletSystem) {
+        initComponents();
+        this.network = network;
+        this.display = display;
+        this.gunBulletSystem = GunBulletSystem.getInstance();
+        this.distributorEnterprise = (DistributorEnterprise) enterprise;
+        this.userAccount = userAccount;
+        this.directory = organizationDirectory;
+        populateTablegunInStock();
+        populateTableBulletsInStock();
+        expense = distributorEnterprise.getExpense();
+        revenue = distributorEnterprise.getRevenue();
+        profit = revenue - expense;
+
+        RTF.setText(Integer.toString(revenue));
+        eTF.setText(Integer.toString(expense));
+        PTF.setText(Integer.toString(profit));
+        count = distributorEnterprise.getTotalcustomer();
+        poptable();
+    }
+
+    private void populateTablegunInStock() {
+        DefaultTableModel model = (DefaultTableModel) TableGunInStock.getModel();
+        model.setRowCount(0);
+        for (GunInventoryitem gunInventoryitem : distributorEnterprise.getGunInventory()) {
+            Object[] row = new Object[3];
+            row[0] = gunInventoryitem.getGun();
+            row[1] = gunInventoryitem.getPrice();
+            row[2] = gunInventoryitem.getGuninventory();
+            model.addRow(row);
+        }
+    }
+
+    private void populateTableBulletsInStock() {
+        DefaultTableModel model = (DefaultTableModel) TableBulletsInStock.getModel();
+        model.setRowCount(0);
+        for (BulletInventoryitem bullet : distributorEnterprise.getBulletInventory()) {
+            Object[] row = new Object[3];
+            row[0] = bullet.getBullet().getName();
+            row[1] = bullet.getPrice();
+            row[2] = bullet.getBulletinventory();
+            model.addRow(row);
+        }
+    }
+
+    private void poptable() {
+        DefaultTableModel dtm1 = (DefaultTableModel) tbl1.getModel();
+        dtm1.setRowCount(0);
+        DefaultTableModel dtm2 = (DefaultTableModel) tbl2.getModel();
+        dtm2.setRowCount(0);
+        for (WorkRequest request : distributorEnterprise.getWorkQueue().getWorkRequestList()) {
+            count = count + 1;
+            if (request instanceof ShopRequest) {
+                ShopRequest shopRequest = (ShopRequest) request;
+                Object[] row = new Object[5];
+                row[0] = shopRequest;
+                row[2] = shopRequest.getQuantity();
+                row[3] = shopRequest.getPrice();
+                row[4] = shopRequest.getStatus();
+                if (shopRequest.getGun() != null) {
+                    row[1] = shopRequest.getGun();
+                    dtm1.addRow(row);
+                } else {
+                    row[1] = shopRequest.getBullet();
+                    dtm2.addRow(row);
+                }
+            }
+        }
+        distributorEnterprise.setTotalcustomer(count);
+
+    }
+
+    private void txt3KeyTyped(java.awt.event.KeyEvent evt) {
+        char enter = evt.getKeyChar();
+        if (!(Character.isDigit(enter))) {
+            evt.consume();
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TableGunInStock = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbl1 = new javax.swing.JTable();
+        CheckoutGuns = new javax.swing.JButton();
+        RemoveGun = new javax.swing.JButton();
+        Refresh = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TableBulletsInStock = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tbl2 = new javax.swing.JTable();
+        CheckOutBullets = new javax.swing.JButton();
+        RemoveBulletes = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        Back1btn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        eTF = new javax.swing.JTextField();
+        RTF = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        PTF = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        Back2btn = new javax.swing.JButton();
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Guns", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(255, 51, 102))); // NOI18N
+
+        TableGunInStock.setBackground(new java.awt.Color(153, 153, 255));
+        TableGunInStock.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.lightGray, java.awt.Color.lightGray));
+        TableGunInStock.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Guns", "Price", "InStock"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TableGunInStock);
+
+        tbl1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Customer", "Gun", "Quantity", "Price", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tbl1);
+
+        CheckoutGuns.setBackground(new java.awt.Color(0, 153, 153));
+        CheckoutGuns.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        CheckoutGuns.setText("Check Out>>");
+        CheckoutGuns.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        CheckoutGuns.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckoutGunsActionPerformed(evt);
+            }
+        });
+
+        RemoveGun.setBackground(new java.awt.Color(0, 153, 153));
+        RemoveGun.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        RemoveGun.setText("Remove");
+        RemoveGun.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        RemoveGun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveGunActionPerformed(evt);
+            }
+        });
+
+        Refresh.setBackground(new java.awt.Color(0, 153, 153));
+        Refresh.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        Refresh.setText("Refesh");
+        Refresh.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshActionPerformed(evt);
+            }
+        });
+
+        TableBulletsInStock.setBackground(new java.awt.Color(102, 153, 255));
+        TableBulletsInStock.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Bulleits", "Price", "Instock"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(TableBulletsInStock);
+
+        tbl2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Customer", "Bullet", "Quantity", "Price", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tbl2);
+
+        CheckOutBullets.setBackground(new java.awt.Color(0, 153, 153));
+        CheckOutBullets.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        CheckOutBullets.setText("Check Out>>");
+        CheckOutBullets.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        CheckOutBullets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckOutBulletsActionPerformed(evt);
+            }
+        });
+
+        RemoveBulletes.setBackground(new java.awt.Color(0, 153, 153));
+        RemoveBulletes.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        RemoveBulletes.setText("Remove");
+        RemoveBulletes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        RemoveBulletes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveBulletesActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setForeground(new java.awt.Color(51, 255, 255));
+        jSeparator1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bullets", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(255, 51, 51))); // NOI18N
+
+        Back1btn.setBackground(new java.awt.Color(0, 153, 255));
+        Back1btn.setText("<<Back");
+        Back1btn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Back1btn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/ManufactureRole/回滚箭头.jpg"))); // NOI18N
+        Back1btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Back1btnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Back1btn)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(CheckOutBullets)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(RemoveBulletes, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(Refresh)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(CheckoutGuns)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(RemoveGun, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(Refresh)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CheckoutGuns)
+                    .addComponent(RemoveGun))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CheckOutBullets)
+                    .addComponent(RemoveBulletes))
+                .addGap(60, 60, 60)
+                .addComponent(Back1btn)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane1, jScrollPane5, jScrollPane6});
+
+        jTabbedPane1.addTab("Order", jPanel2);
+
+        jPanel3.setBackground(new java.awt.Color(255, 204, 255));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 48)); // NOI18N
+        jLabel2.setText("Expense:");
+
+        eTF.setEnabled(false);
+
+        RTF.setEnabled(false);
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 48)); // NOI18N
+        jLabel3.setText("Revenue:");
+
+        PTF.setEnabled(false);
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 48)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel4.setText("Profit:");
+
+        Back2btn.setBackground(new java.awt.Color(0, 153, 255));
+        Back2btn.setText("<<Back");
+        Back2btn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/ManufactureRole/回滚箭头.jpg"))); // NOI18N
+        Back2btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Back2btnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(420, 420, 420))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(70, 70, 70)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PTF, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eTF, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(RTF, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(Back2btn)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(194, 194, 194)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(eTF, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(69, 69, 69)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(RTF, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(107, 107, 107)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PTF, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(57, 57, 57)
+                .addComponent(Back2btn)
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Data", jPanel3);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void Back2btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back2btnActionPerformed
+        // TODO add your handling code here:
+        display.remove(this);
+        Component[] componentArray = display.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        DistributorAdminWorkJPanel dawjp = (DistributorAdminWorkJPanel) component;
+
+        CardLayout layout = (CardLayout) display.getLayout();
+        layout.previous(display);
+    }//GEN-LAST:event_Back2btnActionPerformed
+
+    private void Back1btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back1btnActionPerformed
+        // TODO add your handling code here:
+        display.remove(this);
+        Component[] componentArray = display.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        DistributorAdminWorkJPanel dawjp = (DistributorAdminWorkJPanel) component;
+
+        CardLayout layout = (CardLayout) display.getLayout();
+        layout.previous(display);
+    }//GEN-LAST:event_Back1btnActionPerformed
+
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        populateTableBulletsInStock();
+        populateTablegunInStock();
+        poptable();
+    }//GEN-LAST:event_RefreshActionPerformed
+
+    private void CheckoutGunsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckoutGunsActionPerformed
+        int selrow = tbl1.getSelectedRow();
+        if (selrow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a gun order!");
+            return;
+        }
+        ShopRequest shopRequest = (ShopRequest) tbl1.getValueAt(selrow, 0);
+        Gun gun = (Gun) tbl1.getValueAt(selrow, 1);
+        int quan = (int) tbl1.getValueAt(selrow, 2);
+        String status = (String) tbl1.getValueAt(selrow, 4);
+        if (status.equals("Completed")) {
+            JOptionPane.showMessageDialog(null, "Order completed!");
+            return;
+        }
+        int instock = 0;
+        int i = 0;
+
+        for (i = 0; i < TableGunInStock.getRowCount(); i++) {
+            if (String.valueOf(TableGunInStock.getValueAt(i, 0)).equals(gun.getName())) {
+                instock = (int) TableGunInStock.getValueAt(i, 2);
+                break;
+            }
+        }
+        if (quan > instock) {
+            JOptionPane.showMessageDialog(null, "Not enough in stock!");
+            return;
+        } else {
+            if (shopRequest.getStatus().equals("ILLEGAL")) {
+                distributorEnterprise.setBlocktimes(distributorEnterprise.getBlocktimes() + quan);
+                distributorEnterprise.setGrade("F");
+            }
+            shopRequest.setStatus("Completed");
+            GunInventoryitem item = distributorEnterprise.getGunInventory().get(i);
+            item.setGuninventory(instock - quan);
+
+            revenue = distributorEnterprise.getRevenue() + quan * shopRequest.getPrice();
+            distributorEnterprise.setRevenue(revenue);
+
+            a = distributorEnterprise.getRevenue();
+            RTF.setText(Integer.toString(a));
+            profit = a - distributorEnterprise.getExpense();
+            PTF.setText(Integer.toString(profit));
+
+            poptable();
+            populateTablegunInStock();
+        }
+    }//GEN-LAST:event_CheckoutGunsActionPerformed
+
+    private void CheckOutBulletsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckOutBulletsActionPerformed
+        int selrow = tbl2.getSelectedRow();
+        if (selrow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a bullet order!");
+            return;
+        }
+        ShopRequest shopRequest = (ShopRequest) tbl2.getValueAt(selrow, 0);
+        Bullet bullet = (Bullet) tbl2.getValueAt(selrow, 1);
+        int quan = (int) tbl2.getValueAt(selrow, 2);
+        String status = (String) tbl2.getValueAt(selrow, 4);
+        if (status.equals("Completed")) {
+            JOptionPane.showMessageDialog(null, "Order completed!");
+            return;
+        }
+        int instock = 0;
+        int i = 0;
+
+        for (i = 0; i < TableBulletsInStock.getRowCount(); i++) {
+            if (String.valueOf(TableBulletsInStock.getValueAt(i, 0)).equals(bullet.getName())) {
+                instock = (int) TableBulletsInStock.getValueAt(i, 2);
+                break;
+            }
+        }
+        if (quan > instock) {
+            JOptionPane.showMessageDialog(null, "Not enough in stock!");
+            return;
+        } else {
+            if (shopRequest.getStatus().equals("ILLEGAL")) {
+                distributorEnterprise.setBlocktimes(distributorEnterprise.getBlocktimes() + quan);
+            }
+            shopRequest.setStatus("Completed");
+            BulletInventoryitem item = distributorEnterprise.getBulletInventory().get(i);
+            item.setBulletinventory(instock - quan);
+            int c = distributorEnterprise.getRevenue() + quan * shopRequest.getPrice();
+            distributorEnterprise.setRevenue(c);
+
+            a = distributorEnterprise.getRevenue();
+            RTF.setText(Integer.toString(a));
+            profit = a - distributorEnterprise.getExpense();
+            PTF.setText(Integer.toString(profit));
+
+            poptable();
+            populateTableBulletsInStock();
+        }
+    }//GEN-LAST:event_CheckOutBulletsActionPerformed
+
+    private void RemoveGunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveGunActionPerformed
+        int selrow = tbl1.getSelectedRow();
+        if (selrow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a gun order!");
+            return;
+        }
+        if (JOptionPane.NO_OPTION == JOptionPane.showConfirmDialog(null, "Do you want to remove this row?", "Warning", JOptionPane.YES_NO_OPTION)) {
+            return;
+        }
+        ShopRequest shopRequest = (ShopRequest) tbl1.getValueAt(selrow, 0);
+        distributorEnterprise.getWorkQueue().getWorkRequestList().remove(shopRequest);
+        poptable();
+    }//GEN-LAST:event_RemoveGunActionPerformed
+
+    private void RemoveBulletesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveBulletesActionPerformed
+        int selrow = tbl2.getSelectedRow();
+        if (selrow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a bullet order!");
+            return;
+        }
+        if (JOptionPane.NO_OPTION == JOptionPane.showConfirmDialog(null, "Do you want to remove this row?", "Warning", JOptionPane.YES_NO_OPTION)) {
+            return;
+        }
+        ShopRequest shopRequest = (ShopRequest) tbl2.getValueAt(selrow, 0);
+        distributorEnterprise.getWorkQueue().getWorkRequestList().remove(shopRequest);
+        poptable();
+    }//GEN-LAST:event_RemoveBulletesActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Back1btn;
+    private javax.swing.JButton Back2btn;
+    private javax.swing.JButton CheckOutBullets;
+    private javax.swing.JButton CheckoutGuns;
+    private javax.swing.JTextField PTF;
+    private javax.swing.JTextField RTF;
+    private javax.swing.JButton Refresh;
+    private javax.swing.JButton RemoveBulletes;
+    private javax.swing.JButton RemoveGun;
+    private javax.swing.JTable TableBulletsInStock;
+    private javax.swing.JTable TableGunInStock;
+    private javax.swing.JTextField eTF;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable tbl1;
+    private javax.swing.JTable tbl2;
+    // End of variables declaration//GEN-END:variables
+}

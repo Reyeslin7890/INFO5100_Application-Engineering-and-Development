@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/SystemAdmin/ManageNetworkJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Role/Role.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/CustomerRole/CustomerWorkArea.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/UserAccount/UserAccount.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Person/PersonDirectory.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Gun/GunDirectory.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Organization/OrganizationDirectory.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/DB4OUtil/DB4OUtil.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/SignUpCustomer.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/WorkQueue/GunRequest.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Person/Person.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/DistributorRole/ManageOrder.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/ManufactureRole/ManufactureAdminWorkJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Gun/GunBulletSystem.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Organization/Organization.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/GovernementRole/ManageGoverment.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Role/CustomerRole.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/GovernementRole/VerificationRole/ManageVerificationJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Gun/BulletInventoryitem.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/SystemAdmin/ManageEnterpriseJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Network/Network.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/ManufactureRole/Manufactorwork.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/WorkQueue/BulletRequst.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/SystemAdmin/ManageEnterpriseAdminJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Gun/Bullet.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/GovernementRole/CertificationRole/ProcessAssignments.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/ManufactureRole/ManageOrder.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Gun/Gun.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/CustomerRole/ApplyVerification.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/GovernementRole/VerificationRole/PersonInfromationFormJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/GovernementRole/EvaluationRole/ManageEvaluationJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/MainJF.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/DistributorRole/DistributorAdminWorkJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/GunSystem.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Enterprise/ManufactorEnterprise.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/WorkQueue/WorkRequest.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/UserAccount/UserAccountDirectory.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/CustomerRole/ApplyCertificate.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/CustomerRole/ShopGuns.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Enterprise/Enterprise.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/GovernementRole/GovernmentAdminWorkJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/Business/Enterprise/EnterpriseDirectory.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/CustomerRole/BlackGun.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/GovernementRole/CertificationRole/ManageCertificationJPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/DistributorRole/ManageTabbedPanel.java</file>
+            <file>file:/C:/Users/zhaoh/Neakjie/Final/final/FinalProject/src/UserInterface/SystemAdmin/SystemAdminWorkAreaJPanel.java</file>
+        </group>
+    </open-files>
+</project-private>
